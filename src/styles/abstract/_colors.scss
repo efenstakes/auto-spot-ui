@@ -1,0 +1,99 @@
+
+// primary: {
+//     main: '#c0a2c7',
+//   },
+//   secondary: {
+//     main: '#df8485',
+
+$PRIMARY_COLOR: #c0a2c7;  // 64, 1, 30
+$SECONDARY_COLOR: #df8485; // 191, 52, 182
+$TERTIARY_COLOR: #9ebadf; // 113, 16, 115
+$COLOR_1: #40011E; // 64, 1, 30
+$COLOR_2: #BF34B6; // 191, 52, 182
+$COLOR_3: #711073; // 113, 16, 115
+$COLOR_4: #1B4C8C; // 27, 76, 140
+$COLOR_5: #0F8AA6; // 15, 138, 166
+
+
+$BLACK_COLOR: #262626; // 54, 54, 54
+$BLACK_ALT_COLOR: #363636; // 38, 38, 38
+$WHITE_COLOR: #FFFFFF; // 255, 255, 255
+
+$SUCCESS_COLOR: #11872e; // 17, 135, 46
+$ERROR_COLOR: #F23535; // 242, 53, 53
+
+$SUCCESS_GRADIENT: "";
+$ERROR_GRADIENT: "";
+
+
+$CARDS_BACKGROUND: rgba(242, 184, 75, .6);
+$ERROR_COLOR_OPACITY: rgba(242, 53, 53, .6);
+
+
+
+.primary_gradient {
+    background-image: linear-gradient( 30deg, $PRIMARY_COLOR, $SECONDARY_COLOR );
+}
+.primary_gradient_alt {
+    background-image: linear-gradient( 30deg, $SECONDARY_COLOR, $PRIMARY_COLOR );
+}
+
+@for $index from 1 to 12 {
+    .g_bg_ps_#{$index} {
+        background-image: linear-gradient( calc(#{$index}30deg), $SECONDARY_COLOR, $PRIMARY_COLOR );
+        color: wheat;
+    } 
+}
+
+@for $index from 1 to 12 {
+    .g_bg_sp_#{$index} {
+        // background-image: linear-gradient( calc(#{$index}30deg), $PRIMARY_COLOR, $SECONDARY_COLOR );
+        // background-image: linear-gradient( calc(#{$index}30deg), $TERTIARY_COLOR, $PRIMARY_COLOR );
+        background-color: $BLACK_COLOR;
+        color: wheat;
+    } 
+}
+
+
+.black_background, .bg_black {
+    background-color: $BLACK_COLOR;
+    color: wheat;
+}
+
+@for $index from 1 to 9 {
+    .bg_black_#{$index} {
+        background-color: rgba(30, 30, 30, calc($index/10));
+        color: wheat;
+    } 
+}
+
+
+// themed backgrounds
+
+
+.themed_bg_primary {
+    background-color: rgba($PRIMARY_COLOR, .15);
+    color: $PRIMARY_COLOR;
+}
+
+.themed_bg_primary_inverse {
+    color: rgba($PRIMARY_COLOR, .15);
+    background-color: $PRIMARY_COLOR;
+}
+
+
+.themed_bg_secondary {
+    background-color: rgba($SECONDARY_COLOR, .15);
+    color: $SECONDARY_COLOR;
+}
+
+.themed_bg_black {
+    background-color: rgba($BLACK_COLOR, .15);
+    color: $BLACK_COLOR;
+}
+
+.themed_bg_tertiary {
+    background-color: rgba($TERTIARY_COLOR, .15);
+    color: $TERTIARY_COLOR;
+}
+

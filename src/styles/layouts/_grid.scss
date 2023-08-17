@@ -1,0 +1,153 @@
+
+
+.stats_grid {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    
+    @media screen and (max-width: 560px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.6rem;
+    }
+    
+    @media screen and (max-width: 320px) {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 2rem 0;
+    }
+}
+
+
+// flex
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.row_centered {
+    @extend .row;
+    justify-content: center;
+    align-items: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+.column_centered {
+    @extend .column;
+    justify-content: center;
+    align-items: center;
+}
+
+.row_wrapped {
+    @extend .row;
+    flex-wrap: wrap;
+}
+
+.adaptive_row {
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: 700px) {
+        flex-direction: row;
+        
+        .row_reverse {
+            flex-direction: row-reverse;
+        }
+        .js {
+            justify-content: flex-start;
+        }
+        .jc {
+            justify-content: center;
+        }
+        .jsb {
+            justify-content: space-between;
+        }
+        .jsa {
+            justify-content: space-around;
+        }
+        .jse {
+            justify-content: space-evenly;
+        }
+        .je, .jfe {
+            justify-content: flex-end;
+        }
+
+        .ac {
+            align-items: center;
+        }
+        .asa {
+            align-items: space-around;
+        }
+        .ase {
+            align-items: space-evenly;
+        }
+        .asa {
+            align-items: space-around;
+        }
+        .ca_start, .as {
+            align-content: start;
+        }
+        .ae, .afe {
+            align-content: end;
+        }
+    }
+    @media screen and (min-width: 1200px) {
+        flex-direction: row;
+        
+        .row_reverse {
+            flex-direction: row-reverse;
+        }
+    }
+}
+
+.row_reverse {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.ma_center, .jc {
+    justify-content: center;
+}
+.ma_space_btn, .jsb {
+    justify-content: space-between;
+}
+.ma_evenly, .jse {
+    justify-content: space-evenly;
+}
+.ma_around, .jsa {
+    justify-content: space-around;
+}
+.ma_start, .jfs {
+    justify-content: start;
+}
+.ma_end, .jfe {
+    justify-content: end;
+}
+
+.ca_center, .ac {
+    align-items: center;
+}
+.ca_space_btn, .asa {
+    align-items: space-around;
+}
+.ca_evenly, .ase {
+    align-items: space-evenly;
+}
+.ca_around, .asa {
+    align-items: space-around;
+}
+.ca_start, .as {
+    align-content: start;
+}
+.ca_end, .ae {
+    align-content: end;
+}
+
+

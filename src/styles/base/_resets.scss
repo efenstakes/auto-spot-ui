@@ -1,0 +1,107 @@
+
+
+html {
+  font-size: 18px;
+}
+
+// remove all default margins and padding 
+// set box sizing to border box 
+*, *:before, *:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+input, button, canvas:hover, canvas:focus {
+  outline: none;
+  border: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a, .app_link {
+  text-decoration: none;
+  color: inherit;
+}
+
+// disable image dragging or selection 
+img {
+  max-width: 100%; 
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+iframe {
+  width: 0;
+  display: none;
+}
+
+
+// for react-phone-number-input styling
+
+.PhoneInput {
+  overflow: hidden;
+  min-height: 56px;
+  max-width: 500px;
+  border-radius: 8px;
+  background-color: transparent;
+  border: 1px solid gray;
+  padding-left: 1rem;
+}
+
+.PhoneInputInput {
+  padding-left: 1rem;
+  min-height: 56px;
+  background-color: transparent;
+}
+
+
+// material ui stepper step icons
+
+.MuiStepIcon-text {
+  font-size: .64rem;
+}
+
+.MuiStepLabel-iconContainer {
+
+}
+
+.MuiStep-root {
+  
+  // the svg icon thats not active
+  .MuiSvgIcon-root {
+    fill: transparent;
+    stroke: $PRIMARY_COLOR;
+  }
+
+  // the svg icon thats active
+  .MuiSvgIcon-root.Mui-active {
+    
+    .MuiStepIcon-text {
+    }
+  }
+
+      
+  .MuiStepIcon-text {
+    color: $PRIMARY_COLOR;
+  }
+
+}
+
+.css-5dgeka-MuiStepLabel-label.Mui-active {
+  color: $PRIMARY_COLOR;
+}
+
+.MuiMenuItem-root {
+  background-color: whitesmoke;
+
+}

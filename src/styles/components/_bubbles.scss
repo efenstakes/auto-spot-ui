@@ -1,0 +1,43 @@
+@import '../abstract/colors';
+@import '../abstract/variables';
+
+
+
+.bubble {
+    border-radius: 50%;
+    min-height: 1rem;
+    min-width: 1rem;
+
+    position: absolute;
+
+    z-index: -5;
+
+    background-blend-mode: darken;
+
+    transition: 400ms;
+}
+
+.bubble_sm {
+    max-width: 40px;
+    max-height: 40px;
+
+    &:hover {
+        transform: scale(1.5);
+    }
+}
+.bubble_md {
+    max-width: 64px;
+    max-height: 64px;
+
+    &:hover {
+        transform: scale(1.3);
+    }
+}
+.bubble_lg {
+    max-width: 80px;
+    max-height: 80px;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}

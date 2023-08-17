@@ -1,0 +1,59 @@
+
+.chip {
+    @extend .row;
+    @extend .ma_center;
+    @extend .ca_center;
+    border-radius: $BORDER_RADIUS_LG;
+
+    cursor: pointer;
+}
+
+.chip_sm {
+    @extend .chip;
+    @extend .text_8;
+    
+    padding: .2rem 1rem;
+}
+
+.chip_md {
+    @extend .chip;
+    @extend .text_7;
+    
+    padding: .24rem 1.2rem;
+
+    @media screen and (min-width: $DESKTOP_SIZE) {
+        padding: .32rem 1.2rem;
+    }
+}
+
+.chip_lg {
+    @extend .chip;
+    @extend .text_7;
+    
+    padding: .28rem 1.6rem;
+}
+
+.chip_primary {
+    background-color: $PRIMARY_COLOR;
+    color: $WHITE_COLOR;
+    border-radius: $BORDER_RADIUS_LG;
+}
+.chip_primary_outlined {
+    color: $PRIMARY_COLOR;
+    border: 1px solid  $PRIMARY_COLOR;
+
+    border-radius: $BORDER_RADIUS_LG;
+}
+
+.chip_dark {
+    background-color: $BLACK_COLOR;
+    color: $WHITE_COLOR;
+    border-radius: $BORDER_RADIUS_LG;
+}
+.chip_dark_outlined {
+    background-color: transparent;
+    color: $BLACK_COLOR;
+    border-radius: $BORDER_RADIUS_LG;
+    
+    border: 1px solid  $BLACK_COLOR;
+}
