@@ -5,12 +5,13 @@
 //   secondary: {
 //     main: '#df8485',
 
-$PRIMARY_COLOR: #c0a2c7;  // 64, 1, 30
-$SECONDARY_COLOR: #df8485; // 191, 52, 182
-$TERTIARY_COLOR: #9ebadf; // 113, 16, 115
-$COLOR_1: #40011E; // 64, 1, 30
-$COLOR_2: #BF34B6; // 191, 52, 182
-$COLOR_3: #711073; // 113, 16, 115
+
+$PRIMARY_COLOR: #1F72A6;  // 64, 1, 30
+$SECONDARY_COLOR: #0FA6A6; // 191, 52, 182
+$TERTIARY_COLOR: #A0D3D9; // 113, 16, 115
+$COLOR_1: #1F72A6; // 64, 1, 30
+$COLOR_2: #0FA6A6; // 191, 52, 182
+$COLOR_3: #A0D3D9; // 113, 16, 115
 $COLOR_4: #1B4C8C; // 27, 76, 140
 $COLOR_5: #0F8AA6; // 15, 138, 166
 
@@ -72,28 +73,28 @@ $ERROR_COLOR_OPACITY: rgba(242, 53, 53, .6);
 
 
 .themed_bg_primary {
-    background-color: rgba($PRIMARY_COLOR, .15);
+    background-color: rgba($PRIMARY_COLOR, .2);
     color: $PRIMARY_COLOR;
 }
 
 .themed_bg_primary_inverse {
-    color: rgba($PRIMARY_COLOR, .15);
+    color: rgba($PRIMARY_COLOR, .2);
     background-color: $PRIMARY_COLOR;
 }
 
 
 .themed_bg_secondary {
-    background-color: rgba($SECONDARY_COLOR, .15);
+    background-color: rgba($SECONDARY_COLOR, .2);
     color: $SECONDARY_COLOR;
 }
 
 .themed_bg_black {
-    background-color: rgba($BLACK_COLOR, .15);
+    background-color: rgba($BLACK_COLOR, .2);
     color: $BLACK_COLOR;
 }
 
 .themed_bg_tertiary {
-    background-color: rgba($TERTIARY_COLOR, .15);
+    background-color: rgba($TERTIARY_COLOR, .2);
     color: $TERTIARY_COLOR;
 }
 
