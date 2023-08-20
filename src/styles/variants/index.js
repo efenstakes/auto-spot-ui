@@ -1,24 +1,26 @@
+import { BLACK_COLOR } from "../theme"
 
 
 
 
 export const containerVariants = {
     initial: {
-        scale: .8,
+        // scale: .8,
         opacity: 0,
     },
     animate: {
         scale: 1,
         opacity: 1,
         transition: {
+            duration: 1,
             when: "beforeChildren",
-            delay: .1,
+            delay: .2,
             staggerChildren: 0.1,
         },
     },
     exit: {
         opacity: 0,
-        scale: .8,
+        // scale: .8,
     }
 }
 
@@ -32,7 +34,7 @@ export const itemVariants = {
         opacity: 1,
         transition: {
             when: "beforeChildren",
-            delay: .1,
+            delay: .2,
             staggerChildren: 0.1,
         },
     },
@@ -62,7 +64,7 @@ export const logoContainerVariants = {
         opacity: 1,
         transition: {
             when: "beforeChildren",
-            delay: 1,
+            delay: .5,
             staggerChildren: 0.2,
         },
     },
@@ -76,15 +78,19 @@ export const logoContainerVariants = {
 export const logoVariants = {
     initial: {
         strokeDashoffset: 1,
-        fill: 'none',
+        // fill: 'none',
         // y: 120,
+        transition: {
+            duration: 2,
+        },
     },
     animate: {
         // y: 0,
         strokeDashoffset: 0,
-        // fill: 'white',
+        // fill: BLACK_COLOR,
         transition: {
             delay: .5,
-        }
+            duration: 2,
+        },
     },
 }
