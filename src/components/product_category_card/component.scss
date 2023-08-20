@@ -1,0 +1,18 @@
+@import '../../styles/commons';
+
+
+.product_category_card {
+    height: 160px;
+    width: 100%;
+
+    max-width: 400px;
+
+    padding: 1rem;
+
+    border-radius: $BORDER_RADIUS_SM;
+}
+
+.product_category_card__text {
+    max-width: 320px;
+    text-align: center;
+}
