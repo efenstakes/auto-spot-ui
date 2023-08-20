@@ -1,6 +1,6 @@
 import { useLazyQuery } from '@apollo/client';
 import React, { createContext, useState, useEffect, useMemo, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 
 // graphql
@@ -25,7 +25,6 @@ export const ProfileContext = createContext({
 
 
 const ProfileProvider = ({ children }: { children: React.ReactNode }) => {
-    const dispatch = useDispatch()
 
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [hasError, setHasError] = useState<boolean>(false)
