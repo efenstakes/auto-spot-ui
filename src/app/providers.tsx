@@ -1,9 +1,12 @@
 "use client"
 import React, { ReactNode } from 'react'
+import { AnimatePresence, } from 'framer-motion'
+import { Provider } from 'jotai'
 
 // graphql
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context';
+
 
 // date pickers
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -15,7 +18,7 @@ import { ThemeProvider } from '@mui/material'
 // profile provider
 import ProfileProvider from '@/providers/profile'
 
-import { Provider } from 'react-redux'
+// import { Provider } from 'react-redux'
 // import store from '@/store'
 
 // mui theme
@@ -32,7 +35,7 @@ import { ToastContainer } from 'react-toastify';
 
 
 const httpLink = createHttpLink({
-  uri: `${SERVER_URL}/q`,
+  uri: `${SERVER_URL}/graph`,
   // include works for development because server and ui are in different domains
   // in prod, same-origin should be used instead
   credentials: 'same-origin', // 'include', // 'same-origin'
@@ -63,18 +66,22 @@ const client = new ApolloClient({
 const ProvidersComponent = ({ children }: { children: ReactNode }) => {
   return (
     <>
+      <AnimatePresence>
       <ApolloProvider client={client}>
         {/* <Provider store={store}> */}
           <ThemeProvider theme={theme}>
             <ProfileProvider>
+              <Provider>
               <LocalizationProvider dateAdapter={AdapterMoment}>
                 <ToastContainer autoClose={6000} />
                     {children}
               </LocalizationProvider>
+              </Provider>
             </ProfileProvider>
           </ThemeProvider>
         {/* </Provider> */}
       </ApolloProvider>
+      </AnimatePresence>
     </>
   )
 }
