@@ -4,3 +4,33 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
+
+
+.page {
+    // background-color: deeppink;
+    padding: 0 16px;
+
+
+    @include tablet_up_query {
+        padding: 0 10vw;
+    }
+
+    @include desktop_query {
+        padding: 0 15vw;
+    }
+}
+
+
+.slim_page {
+    // background-color: deeppink;
+    padding: 0 16px;
+
+
+    @include tablet_up_query {
+        padding: 0 10vw;
+    }
+
+    @include desktop_query {
+        padding: 0 20vw;
+    }
+}
