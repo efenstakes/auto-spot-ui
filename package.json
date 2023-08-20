@@ -28,6 +28,7 @@
     "firebase": "^10.1.0",
     "framer-motion": "^10.16.0",
     "framer-motion-3d": "^10.16.0",
+    "jotai": "^2.3.1",
     "lamina": "^1.1.23",
     "leva": "^0.9.35",
     "moment": "^2.29.4",
