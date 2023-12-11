@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+"use client"
+import React, { useContext, useEffect, useState } from 'react'
 
 import { motion, } from 'framer-motion'
 import { MdList, MdOutlineAccountCircle, MdOutlineLogout, MdOutlinePerson4, MdPerson } from 'react-icons/md';
@@ -17,50 +18,57 @@ import { atom, useAtom, useSetAtom } from 'jotai';
 import { cartAtom } from '@/store/cart';
 import ICartItem from '@/models/cart';
 import { BLACK_COLOR, PRIMARY_COLOR } from '@/styles/theme';
+import { ProfileContext } from '@/providers/profile';
+import { clearLocalProfileData } from '@/services/profile';
+import { useRouter } from 'next/navigation';
 
 const Appbar = ({ showCart = true }: { showCart?: boolean }) => {
+    const router = useRouter()
     const width = useWindowWidth()
     const isMobile = width < 840
 
     const [ cart, setCart ] = useAtom(cartAtom)
+
+    const { profile, clearProfileData, } = useContext(ProfileContext)
     
-    const [accountButtonRef, setAccountButtonRef] = React.useState<null | HTMLElement>(null);
+    // const [openLoginDialog, setOpenLoginDialog] = useState(false)
+    const [accountButtonRef, setAccountButtonRef] = useState<null | HTMLElement>(null);
     const open = Boolean(accountButtonRef)
 
     // console.log("cart ",cart)
     
 
     useEffect(()=> {
-        setCart((prev)=> {
+        // setCart((prev)=> {
 
-            return {
-                items: [
+        //     return {
+        //         items: [
 
-                    {
-                        quantity: 2,
-                        product: {
-                            name: "Test 1",
-                            _id: "wrdgvd",
-                            brand: "Toyota",
-                            model: "Lexus",
-                            year: 2020,
-                            price: 200,
-                        }
-                    },
-                    {
-                        quantity: 3,
-                        product: {
-                            name: "Test 2",
-                            _id: "5467uyhtgre",
-                            brand: "Mercedez Benz",
-                            model: "q3",
-                            year: 2022,
-                            price: 200,
-                        }
-                    },
-                ]
-            }
-        })
+        //             {
+        //                 quantity: 2,
+        //                 product: {
+        //                     name: "Test 1",
+        //                     _id: "wrdgvd",
+        //                     brand: "Toyota",
+        //                     model: "Lexus",
+        //                     year: 2020,
+        //                     price: 200,
+        //                 }
+        //             },
+        //             {
+        //                 quantity: 3,
+        //                 product: {
+        //                     name: "Test 2",
+        //                     _id: "5467uyhtgre",
+        //                     brand: "Mercedez Benz",
+        //                     model: "q3",
+        //                     year: 2022,
+        //                     price: 200,
+        //                 }
+        //             },
+        //         ]
+        //     }
+        // })
     
     }, [])
 
@@ -80,9 +88,10 @@ const Appbar = ({ showCart = true }: { showCart?: boolean }) => {
 
     const handleCloseAndLogout = ()=> {
         handleClose()
+        
+        clearProfileData()
 
-        // updateProfileData(null)
-        // clearLocalProfileData()
+        router.push(Routes.home)
     }
     
     return (
@@ -220,47 +229,91 @@ const Appbar = ({ showCart = true }: { showCart?: boolean }) => {
             >
 
                 {/* my profile */}
-                <Link href={""}>
-                    <MenuItem onClick={handleClose}>
-                        <AppbarMenuItemIcon classes='themed_bg_primary'>
-                            <MdOutlinePerson4 />
-                        </AppbarMenuItemIcon>
+                {
+                    profile &&
+                        <Link href={Routes.myProfile}>
+                            <MenuItem onClick={handleClose}>
+                                <AppbarMenuItemIcon classes='themed_bg_primary'>
+                                    <MdOutlinePerson4 />
+                                </AppbarMenuItemIcon>
+        
+                                <small>
+                                    My Profile
+                                </small>
+                            </MenuItem>
+                        </Link>
+                }
 
-                        <small>
-                            Profile
-                        </small>
-                    </MenuItem>
-                </Link>
+                {/* my orders */}
+                {
+                    profile &&
+                        <Link href={Routes.myOrders}>
+                            <MenuItem onClick={handleClose}>
+                                <AppbarMenuItemIcon classes='themed_bg_secondary'>
+                                    <MdList />
+                                </AppbarMenuItemIcon>
 
-                {/* my appointments */}
-                <Link href={""}>
-                    <MenuItem onClick={handleClose}>
-                        <AppbarMenuItemIcon classes='themed_bg_secondary'>
-                            <MdList />
-                        </AppbarMenuItemIcon>
+                                <small>
+                                    My Orders
+                                </small>
+                            </MenuItem>
+                        </Link>
+                }
 
-                        <small>
-                            My account
-                        </small>
-                    </MenuItem>
-                </Link>
-                
-                
-                <Divider />
-                
+                { profile && <Divider /> }
+
                 {/* logout */}
-                <MenuItem onClick={handleCloseAndLogout}>
-                    <AppbarMenuItemIcon classes='themed_bg_tertiary'>
-                        <MdOutlineLogout />
-                    </AppbarMenuItemIcon>
+                {
+                    profile &&
+                        <MenuItem onClick={handleCloseAndLogout}>
+                            <AppbarMenuItemIcon classes='themed_bg_tertiary'>
+                                <MdOutlineLogout />
+                            </AppbarMenuItemIcon>
 
-                    <small>
-                        Log Out
-                    </small>
-                </MenuItem>
+                            <small>
+                                Log Out
+                            </small>
+                        </MenuItem>
+                }
+
+                
+                
+                {/* login */}
+                { 
+                    !profile &&
+                        <Link href={Routes.login}>
+                            <MenuItem>
+                                <AppbarMenuItemIcon classes='themed_bg_tertiary'>
+                                    <MdOutlinePerson4 />
+                                </AppbarMenuItemIcon>
+
+                                <small>
+                                    Login
+                                </small>
+                            </MenuItem>
+                        </Link>
+                }
+
+                {/* create account */}
+                { 
+                    !profile &&
+                        <Link href={Routes.login}>
+                            <MenuItem>
+                                <AppbarMenuItemIcon classes='themed_bg_tertiary'>
+                                    <MdOutlinePerson4 />
+                                </AppbarMenuItemIcon>
+
+                                <small>
+                                    Create Account
+                                </small>
+                            </MenuItem>
+                        </Link>
+                }
+                
 
             </Menu>
             
+            {/* <LoginDialog openDialog={openLoginDialog} onClose={ ()=> setOpenLoginDialog(false) } /> */}
         </motion.div>
     )
 }
