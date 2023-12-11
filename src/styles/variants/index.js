@@ -15,7 +15,7 @@ export const containerVariants = {
             duration: 1,
             when: "beforeChildren",
             delay: .2,
-            staggerChildren: 0.1,
+            staggerChildren: .1,
         },
     },
     exit: {
@@ -33,9 +33,9 @@ export const itemVariants = {
         y: 0,
         opacity: 1,
         transition: {
-            when: "beforeChildren",
-            delay: .2,
-            staggerChildren: 0.1,
+            // when: "beforeChildren",
+            // delay: .2,
+            // staggerChildren: 0.1,
         },
     },
 }
