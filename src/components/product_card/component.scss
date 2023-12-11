@@ -1,0 +1,54 @@
+@import "../../styles/commons";
+
+
+.product_card {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+    width: 100%;
+    max-width: 440px;
+
+    padding: 6px;
+    border: 1px solid lightgrey;
+    border-radius: $BORDER_RADIUS_SM;
+
+    overflow: hidden;
+}
+
+.product_card__image_container {
+    width: 100%;
+    border-radius: $BORDER_RADIUS_SM;
+
+    height: 180px;
+
+    overflow: hidden;
+
+    &:hover .product_card__image {
+        transform: scale(1.1);
+    }
+}
+
+.product_card__image {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+
+    transition: 400ms;
+}
+
+
+.product_card__brand_model {
+    gap: 1rem;
+}
+
+.product_card__brand_model_divider {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background-color: darkgray;
+}
+
+
