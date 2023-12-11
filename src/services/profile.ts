@@ -12,7 +12,7 @@ export const saveProfileLocal = (profile: IProfile)=> {
         PROFILE_ACCESS_TOKEN,
         JSON.stringify({
           token: profile.accessToken,
-          assigned_at: Date.now()
+          assignedAt: Date.now()
         })
       )
     }
@@ -67,4 +67,45 @@ export const clearLocalProfileData = ()=> {
   localStorage.removeItem(PROFILE_STORAGE_NAME)
   localStorage.removeItem(PROFILE_ACCESS_TOKEN)
   localStorage.removeItem(PROFILE_REFRESH_TOKEN)
+}
+
+
+export const isPhoneValid = (phone: string): string | null => {
+
+  if( !phone ) {
+    console.log('====================================');
+    console.log("Please provide a phone number.");
+    console.log('====================================');
+    return "Please provide a phone number."
+}
+
+
+if( phone && phone.length != 12 ) {
+
+    console.log('====================================');
+    console.log("Please provide a phone number.");
+    console.log('====================================');
+
+    return "Please provide a phone number."
+}
+
+if( !phone.startsWith("254") ) {
+
+    console.log('====================================');
+    console.log("Please ensure your phone number starts with 254.");
+    console.log('====================================');
+
+    return "Please ensure your phone number starts with 254."
+}
+
+  if( phone.match(/[a-z]/) ) {
+
+      console.log('====================================');
+      console.log("Please enter a valid phone number..");
+      console.log('====================================');
+
+      return "Please enter a valid phone number."
+  }
+
+  return null
 }
