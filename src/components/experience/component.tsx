@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Backdrop, Box, ContactShadows, Loader, OrbitControls, Shadow, Sky, SpotLight, Stage, Stars, Text, } from '@react-three/drei'
 
@@ -61,29 +61,32 @@ const Experience = () => {
                 }}
             >
 
-                {/* <ambientLight intensity={.5} /> */}
+                {/* <ambientLight intensity={1} /> */}
                 {/* <spotLight position={[0, 15, 0]} angle={0.3} penumbra={1} castShadow intensity={2} shadow-bias={-0.0001} /> */}
-                {/* <ambientLight color='red' /> */}
+                {/* <ambientLight color='white' /> */}
 
                 {/* <spotLight
                     angle={2}
                     distance={100}
                 /> */}
 
-                <OrbitControls />
+                {/* <OrbitControls /> */}
                 
                 {/* adjustCamera */}
-                <Stage  castShadow receiveShadow intensity={.2} shadows="contact" environment="city">
-                    
-                    {/* <group
-                        rotation-y={Math.PI / 2}
-                        rotation-x={-Math.PI / 17}
-                        position-y={-2}
-                        position-z={-8}
-                    > */}
-                        <CarModel />
-                    {/* </group> */}
-                </Stage>
+                {/* <Stage  castShadow receiveShadow intensity={.2} shadows="contact" environment="city"> */}
+                <Suspense fallback={null}>
+                    <Stage castShadow receiveShadow intensity={.2} shadows="contact" environment="city">
+                        
+                        {/* <group
+                            rotation-y={Math.PI / 2}
+                            rotation-x={-Math.PI / 17}
+                            position-y={-2}
+                            position-z={-8}
+                        > */}
+                            <CarModel />
+                        {/* </group> */}
+                    </Stage>
+                </Suspense>
 
                 {/* <ContactShadows opacity={1} scale={10} blur={1} far={10} resolution={256} color="red" /> */}
 
@@ -111,6 +114,7 @@ const Experience = () => {
                     fog={true} // Reacts to fog (default=false)
                 /> */}
 
+                {/* @ts-ignore */}
                 <SpotLight
                     distance={1000}
                     angle={30}
