@@ -10,7 +10,7 @@ import { GET_PROFILE_QUERY } from '@/graphql/profile';
 import IProfile from '@/models/profile';
 
 // services
-import { getLocalProfile, saveProfileLocal } from '@/services/profile';
+import { clearLocalProfileData, getLocalProfile, saveProfileLocal } from '@/services/profile';
 
 
 // Create the context
@@ -21,6 +21,8 @@ export const ProfileContext = createContext({
     refresh: ()=> {},
     updateProfileData: (u)=> {},
     updateProfilePhone: (u)=> {},
+    clearProfileData: ()=> {},
+    logOut: ()=> {},
 })
 
 
@@ -66,6 +68,17 @@ const ProfileProvider = ({ children }: { children: React.ReactNode }) => {
         []
     )
 
+    const logOut = ()=> {
+        clearProfileData()
+    }
+
+    // Function to update user data
+    const clearProfileData = () => {
+        clearLocalProfileData()
+        setProfile(null)
+        setIsLoading(false)
+    }
+
     // Function to update user data
     const updateProfileData = (user: IProfile) => {
         setProfile(user)
@@ -79,8 +92,8 @@ const ProfileProvider = ({ children }: { children: React.ReactNode }) => {
             ...profile,
             phone,
         }
-        setProfile(updatedProfile)
         saveProfileLocal(updatedProfile)
+        setProfile(updatedProfile)
     }
 
 
@@ -97,8 +110,8 @@ const ProfileProvider = ({ children }: { children: React.ReactNode }) => {
 
     
     const value = useMemo(
-        () => ({ profile, updateProfileData, isLoading, hasError, refresh, updateProfilePhone, }), 
-        [profile, isLoading, hasError, refresh, updateProfilePhone,]
+        () => ({ profile, updateProfileData, isLoading, hasError, refresh, updateProfilePhone, clearProfileData, logOut,}), 
+        [profile, isLoading, hasError, refresh, updateProfilePhone, clearProfileData, logOut,]
     )
     return (
         <ProfileContext.Provider value={value}>
