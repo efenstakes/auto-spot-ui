@@ -2,9 +2,9 @@ import { gql } from '@apollo/client';
 
 
 // update
-export const UPDATE_PROFILE_QUERY = gql`
-  mutation update_profile($name: String!, $email: String!, $phone: String!, $avatar: String, $country: String!) {
-    update_profile(name: $name, email: $email, phone: $phone, avatar: $avatar, country: $country) {
+export const UPDATE_PROFILE_PHONE_QUERY = gql`
+  mutation updatePhoneNumber($phone: String!) {
+    updatePhoneNumber( phone: $phone ) {
       updated
     }
   }
@@ -13,8 +13,8 @@ export const UPDATE_PROFILE_QUERY = gql`
 
 // delete
 export const DELETE_PROFILE_MUTATION = gql`
-  mutation delete_account {
-    delete_account {
+  mutation deleteProfile {
+    deleteProfile {
       deleted
       message
     }
@@ -22,18 +22,18 @@ export const DELETE_PROFILE_MUTATION = gql`
 `
 
 // login query
-export const AUTHENTICATE_QUERY = gql`
-  query authenticate( $token: String! ) {
+export const AUTHENTICATE_MUTATION = gql`
+  mutation authenticate( $token: String! ) {
     authenticate( token: $token ) {
       _id
       name
       email
-      avatar
+      picture
       phone
       
       accessToken
       refreshToken
-      entityType
+      type
     }
   }
 `;
