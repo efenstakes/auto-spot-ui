@@ -9,13 +9,25 @@ import { Chip, Fab, Paper, Stack } from '@mui/material'
 import VSpacer from '../v_spacer/component'
 import { useAtom } from 'jotai'
 import { cartAtom } from '@/store/cart'
+import { BLACK_ALT_COLOR, PRIMARY_COLOR, SECONDARY_COLOR, TERTIARY_COLOR } from '@/styles/theme'
+import IProduct from '@/models/product'
 
-const CartItemCard = ({ quantity, product: { brand, model, name, year, price, _id, } }: ICartItem) => {
+
+
+type displayMode = "CART" | "ORDER"
+type CartItemCardProps = {
+    product: ICartItem
+    mode: displayMode
+}
+// const CartItemCard = ({ quantity, product: { brand, model, name, year, price, _id, } }: ICartItem) => {
+const CartItemCard = ({ mode = "CART", product: { brand, model, name, year, variant, _id, quantity } }: CartItemCardProps) => {
     const [ cart, setCart ] = useAtom(cartAtom)
+
+    const { price, type, } = variant
 
 
     const deleteItem = ()=> {
-        const newItems = cart.items.filter(({ product })=> product._id != _id)
+        const newItems = cart.items.filter((product)=> product?._id != _id)
 
         setCart((_)=> { 
             return { items: newItems }
@@ -23,16 +35,16 @@ const CartItemCard = ({ quantity, product: { brand, model, name, year, price, _i
     }
 
     const addQuantity = ()=> {
-        const newItems = cart.items.map(({ quantity, product })=> {
+        const newItems = cart.items.map((product)=> {
 
-            if( product._id == _id ) {
+            if( product?._id == _id ) {
 
                 return {
+                    ...product,
                     quantity: quantity + 1,
-                    product
                 }
             } else {
-                return { quantity, product }
+                return product
             }
         })
 
@@ -50,16 +62,16 @@ const CartItemCard = ({ quantity, product: { brand, model, name, year, price, _i
 
 
     const reduceQuantity = ()=> {
-        let newItems = cart.items.map(({ quantity, product })=> {
+        let newItems = cart.items.map((product)=> {
 
-            if( product._id == _id ) {
+            if( product?._id == _id ) {
 
                 return {
+                    ...product,
                     quantity: quantity - 1,
-                    product
                 }
             } else {
-                return { quantity, product }
+                return product
             }
         })
         console.log("reduceQuantity :: newItems ", newItems)
@@ -78,7 +90,7 @@ const CartItemCard = ({ quantity, product: { brand, model, name, year, price, _i
     }
 
     return (
-        <Paper style={{ maxWidth: '400px', }}>
+        <Paper style={{ maxWidth: '400px', }} elevation={2}>
         <motion.div
             className='cart_item_card'
             variants={containerVariants}
@@ -96,15 +108,18 @@ const CartItemCard = ({ quantity, product: { brand, model, name, year, price, _i
                 </motion.h3>
 
                 {/* delete icon */}
-                <Fab
-                    size='small'
-                    color="error"
-                    aria-label="Delete from cart"
-                    style={{ boxShadow: 'none', }}
-                    onClick={deleteItem}
-                >
-                    <MdDeleteOutline color="white" />
-                </Fab>
+                {
+                    mode == "CART" &&
+                        <Fab
+                            size='small'
+                            color="error"
+                            aria-label="Delete from cart"
+                            style={{ boxShadow: 'none', }}
+                            onClick={deleteItem}
+                        >
+                            <MdDeleteOutline color="white" />
+                        </Fab>
+                }
 
             </motion.div>
             <VSpacer space={.5} />
@@ -135,45 +150,87 @@ const CartItemCard = ({ quantity, product: { brand, model, name, year, price, _i
             </Stack>
             <VSpacer space={1} />
             
+            {/* variant */}
+            <Chip
+                style={{ borderRadius: 4, }}
+                label={ variant?.name }
+                color='default'
+                variant={'outlined'}
+            />
+            <VSpacer space={1} />
+            
             {/* quantity and add quantity */}
-            <motion.p variants={itemVariants}>
-                Quantity
-            </motion.p>
-            <VSpacer space={.5} />
-
-            <motion.div variants={containerVariants} className='row ca_center' style={{ gap: '1rem' }}>
-
-                {/* add icon */}
-                <motion.div className='' variants={itemVariants}>
-                    <Fab
-                        size='small'
-                        color="secondary"
-                        aria-label="Go to my cart"
-                        style={{ boxShadow: 'none', }}
-                        onClick={addQuantity}
-                    >
-                        +
-                    </Fab>
-                </motion.div>
-
-                {/* qty */}
+            <motion.div variants={containerVariants} className='row ma_space_btn ca_center'>
                 <motion.p variants={itemVariants}>
-                    {quantity}
+                    Quantity
                 </motion.p>
+                <VSpacer space={.5} />
 
-                {/* minus icon */}
-                <motion.div className='' variants={itemVariants}>
-                    <Fab
-                        size='small'
-                        color="secondary"
-                        aria-label="Go to my cart"
-                        style={{ boxShadow: 'none', }}
-                        onClick={reduceQuantity}
-                    >
-                        -
-                    </Fab>
-                </motion.div>
+                {
+                    mode == "ORDER" &&
+                        <motion.div className='' variants={itemVariants}>
+                            <Fab
+                                size='small'
+                                color="secondary"
+                                aria-label="Quantity"
+                                style={{
+                                    boxShadow: 'none',
+                                    borderRadius: '8px',
+                                }}
+                            >
+                                { quantity }
+                            </Fab>
+                        </motion.div>
+                }
+                {
+                    mode == "CART" &&
+                        <motion.div variants={containerVariants} className='row ca_center' style={{ gap: '1rem' }}>
 
+                            {/* add icon */}
+                            <motion.div className='' variants={itemVariants}>
+                                <Fab
+                                    size='small'
+                                    color="secondary"
+                                    aria-label="Go to my cart"
+                                    style={{
+                                        boxShadow: 'none',
+                                        borderRadius: '8px',
+                                        backgroundColor: 'transparent',
+                                        border: `1px solid ${SECONDARY_COLOR}`,
+                                        color: SECONDARY_COLOR,
+                                    }}
+                                    onClick={addQuantity}
+                                >
+                                    +
+                                </Fab>
+                            </motion.div>
+
+                            {/* qty */}
+                            <motion.p variants={itemVariants}>
+                                {quantity}
+                            </motion.p>
+
+                            {/* minus icon */}
+                            <motion.div className='' variants={itemVariants}>
+                                <Fab
+                                    size='small'
+                                    color="secondary"
+                                    aria-label="Go to my cart"
+                                    style={{
+                                        boxShadow: 'none',
+                                        borderRadius: '8px',
+                                        backgroundColor: 'transparent',
+                                        border: `1px solid ${SECONDARY_COLOR}`,
+                                        color: SECONDARY_COLOR,
+                                    }}
+                                    onClick={reduceQuantity}
+                                >
+                                    -
+                                </Fab>
+                            </motion.div>
+
+                        </motion.div>
+                }
             </motion.div>
             <VSpacer space={1} />
 
@@ -189,7 +246,7 @@ const CartItemCard = ({ quantity, product: { brand, model, name, year, price, _i
                 </motion.p>
 
             </motion.div>
-            {/* <VSpacer space={1} /> */}
+            <VSpacer space={.5} />
         
         </motion.div>
         </Paper>
