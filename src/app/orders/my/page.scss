@@ -1,0 +1,23 @@
+@import '../../../styles/commons';
+
+
+.my_orders__grid {
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+    gap: 1rem;
+}
+
+
+.my_orders__empty_container {
+    padding: 2rem 1rem;
+    gap: 8px;
+
+    color: $WHITE_COLOR;
+}
+
+.my_orders__empty_container_text {
+    max-width: 400px;
+    text-align: center;
+}
