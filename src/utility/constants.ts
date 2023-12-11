@@ -14,6 +14,7 @@ export const Routes = {
     cart: "/cart",
     myProfile: "/profile/my",
     myOrders: "/orders/my",
+    login: "/login",
 }
 
 
