@@ -18,9 +18,40 @@ export const GET_PRODUCT_CATEGORIES_QUERY = gql`
 
 
 // get profile query
-export const GET_CATEGORY_PRODUCTS_QUERY = gql`
-  query getProducts($category: String, $brand: String) {
-    getProducts( category: $category, brand: $brand ) {
+// export const GET_CATEGORY_PRODUCTS_QUERY = gql`
+//   query getProducts($name: String, $model: String) {
+//     getProducts( name: $name, model: $model ) {
+        
+//         _id
+//         name
+//         description
+        
+//         brand
+//         model
+
+//         year
+        
+//         price
+        
+//         discount
+        
+
+//         category
+//         subCategory
+//         pictures
+//         deliveryDays
+
+//     }
+//   }
+// `;
+
+
+
+
+// get profile query
+export const GetProductsQuery = gql`
+  query getProducts($name: String, $model: String, $brand: String, $year: Int) {
+    getProducts( name: $name, model: $model, brand: $brand, year: $year ) {
         
         _id
         name
@@ -29,18 +60,75 @@ export const GET_CATEGORY_PRODUCTS_QUERY = gql`
         brand
         model
 
-        year
+        years
         
-        price
-        
-        discount
-        
+        variants {
+          name
+          price
+          discount
+          image
+        }
 
-        category
-        subCategory
-        pictures
         deliveryDays
 
     }
   }
 `;
+
+
+// get profile query
+export const GetProductsQuery2 = gql`
+  query getProducts {
+    getProducts {
+        
+        _id
+        name
+        description
+        
+        brand
+        model
+
+        years
+        
+        variants {
+          name
+          price
+          discount
+          image
+        }
+
+        deliveryDays
+
+    }
+  }
+`;
+
+
+
+// get profile query
+export const GetProductQuery = gql`
+  query getProduct($id: String!) {
+    getProduct( id: $id ) {
+        
+        _id
+        name
+        description
+        
+        brand
+        model
+
+        years
+        
+        variants {
+          name
+          price
+          discount
+          image
+        }
+
+        deliveryDays
+
+    }
+  }
+`;
+
