@@ -9,3 +9,16 @@
     gap: 1rem;
 }
 
+
+.my_order__success_container {
+    gap: 12px;
+    padding: 2rem .5rem;
+
+    color: $WHITE_COLOR;
+}
+
+.my_order__success_container_text {
+    max-width: 480px;
+    text-align: center;
+}
+
