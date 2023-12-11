@@ -25,7 +25,7 @@ import ProfileProvider from '@/providers/profile'
 import theme from '@/styles/theme'
 
 // services
-import { getValidAccessToken } from '@/services/profile'
+import { getLocalProfile, getValidAccessToken } from '@/services/profile'
 
 
 // constants
@@ -44,15 +44,15 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = getValidAccessToken()
-  console.log("token ", token)
+  const profile = getLocalProfile()
+  console.log("token ", profile?.accessToken)
   console.log("profile ", )
   
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      authorization: profile?.accessToken ? `Bearer ${profile?.accessToken}` : "",
     }
   }
 })
