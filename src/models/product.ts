@@ -1,5 +1,17 @@
 
 
+export interface IProductVariant {
+    name?: string
+    price?: number
+
+    discount?: number
+    discountStartDate?: string | Date | number
+    discountEndDate?: string | Date | number
+
+    type?: string
+    image?: string
+}
+
 export default interface IProduct {
 
     _id?: string
@@ -9,12 +21,11 @@ export default interface IProduct {
     category?: string
     brand?: string
     model?: string
-    year?: number
+    years?: number[]
 
-    price?: number
+    quantity?: number
 
-    discount?: number
-    discountStartDate?: string | Date | number
-    discountEndDate?: string | Date | number
+    variants: IProductVariant[]
 
 }
+
