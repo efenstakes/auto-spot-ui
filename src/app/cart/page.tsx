@@ -13,7 +13,7 @@ import { cartAtom } from '@/store/cart'
 import CartItemCard from '@/components/cart_item_card/component'
 import Fab from '@mui/material/Fab'
 import { BsCreditCard2Back } from 'react-icons/bs'
-import { useMutation } from '@apollo/client'
+import { useMutation, } from '@apollo/client'
 import { CREATE_ORDER_MUTATION } from '@/graphql/orders'
 import Alert from '@mui/material/Alert'
 import TextField from '@mui/material/TextField'
@@ -85,21 +85,26 @@ const CartPage = () => {
 
         console.log("cart.items ", cart.items);
         
-        const items = cart.items.map(({ variant, ...rest })=> {
+        const items = cart.items.map(({ _id, quantity, variant, ...rest })=> {
 
             return {
-                ...rest,
-                variant: {
-                    price: variant?.price,
-                    name: variant?.name,
-                }
+                id: _id,
+                variant: variant.name,
+                quantity,
+                // ...rest,
+                // variant: {
+                //     price: variant?.price,
+                //     name: variant?.name,
+                // },
             }
         })
         console.log("send .items ", items);
         createOrderMutation({
             variables: {
-                products: items,
-                phone: phone,
+                input: {
+                    products: items,
+                    phone: phone,
+                }
             }
         })
     }
@@ -283,10 +288,15 @@ const CartPage = () => {
                     <>
 
                         {/* alert that you have not logged in */}
-                        <Alert severity="warning">
-                            You have not logged in. Log in first or enter a mobile phone number to pay and proceed.
-                        </Alert>
-                        <VSpacer space={1} />
+                        {
+                            !profile?.phone && !phone &&
+                                <>
+                                    <Alert severity="warning">
+                                        You have not logged in. Log in first or enter a mobile phone number to pay and proceed.
+                                    </Alert>
+                                    <VSpacer space={1} />
+                                </>
+                        }
 
                         {/* text input to enter phone */}
                         <TextField
@@ -305,9 +315,12 @@ const CartPage = () => {
 
                         {
                             error &&
-                                <Alert severity="error">
-                                    {error}
-                                </Alert>
+                                <>
+                                    <Alert severity="error">
+                                        {error}
+                                    </Alert>
+                                    <VSpacer space={1} />
+                                </>
                         }
 
                         {/* pay */}
@@ -329,6 +342,7 @@ const CartPage = () => {
 
                     </>
             }
+            <VSpacer space={6} />
 
         </motion.div>
     )
