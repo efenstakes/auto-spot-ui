@@ -6,7 +6,7 @@ import VSpacer from '@/components/v_spacer/component'
 import { GetProductsQuery, } from '@/graphql/categories'
 import IProduct from '@/models/product'
 import { ProfileContext } from '@/providers/profile'
-import { containerVariants, itemVariants } from '@/styles/variants'
+import { containerVariants, itemFadeInVariants, itemVariants } from '@/styles/variants'
 import { CAR_BRANDS } from '@/utility/constants'
 import { CarBrandsAndModels } from '@/utility/form_data'
 import { useQuery } from '@apollo/client'
@@ -35,7 +35,13 @@ export default function Home() {
 
 
   // get products
-  const { loading, data, error, refetch, } = useQuery(GetProductsQuery)
+  const { loading, data, error, refetch, } = useQuery(GetProductsQuery, {
+    variables: {
+      input: {},
+      offset: 0,
+      limit: 40,
+    }
+  })
 
   console.log("loading, data, error, ", loading, data, error,);
   
@@ -239,7 +245,7 @@ export default function Home() {
           [ "All", ...CAR_BRANDS ].map((brand)=> {
 
             return (
-              <motion.div key={brand} variants={itemVariants} onClick={()=> onClickBrand(brand)}>
+              <motion.div key={brand} variants={itemFadeInVariants} onClick={()=> onClickBrand(brand)}>
                 <Chip label={brand} color='primary' variant={ filters.brand == brand ? "filled" : "outlined" } />
               </motion.div>
             )
@@ -296,7 +302,7 @@ export default function Home() {
 
             return (
               // <Grid key={index} item sm={12} m={4} lg={3}>
-              <Grid key={index} item xs={12} sm={6} md={4}>
+              <Grid key={index} item xs={12} sm={6} lg={4}>
                 <Link href={`products/${product?._id}`}>
                   <ProductCard product={product} />
                 </Link>
