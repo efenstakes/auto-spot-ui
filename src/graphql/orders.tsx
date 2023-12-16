@@ -3,22 +3,27 @@ import { gql } from "@apollo/client";
 
 
 export const CREATE_ORDER_MUTATION = gql`
-    mutation createOrder( $products: [OrderItemInputType]!, $phone: String ) {
-        createOrder( products: $products, phone: $phone ) {
+    mutation placeOrder( $input: PlaceOrderInput! ) {
+        placeOrder( input: $input ) {
 
-            _id
-            accountId
-            accountType
-            products {
+            ... on Order {
                 _id
-                name
-                price
-                exists
-            }
-            status
+                accountId
+                accountType
+                products {
+                    id
+                    name
+                    price
+                }
+                status
 
-            orderType
-            madeOn
+                orderType
+                madeOn
+            }
+
+            ... on ErrorResult {
+                error
+            }
 
         }
     }
