@@ -48,7 +48,6 @@ const ProductCategory = ({ params: { id, } }: { params: { id: string } }) => {
     console.log("router ", router);
     console.log('====================================');
 
-
     useEffect(()=> {
 
         console.log('====================================');
@@ -80,12 +79,38 @@ const ProductCategory = ({ params: { id, } }: { params: { id: string } }) => {
 
 
     const addItemToCart = ()=> {
-        const newItem = cartItem
-        const newItems = [ ...cart.items, newItem ]
+        let exists = cart.items.find((item)=> item.variant.name == cartItem?.variant?.name)
 
-        // setCart((_)=> {
+        let newItems = []
+        if( exists ) {
 
-        //     return { items: newItems }
+            newItems = cart.items.map((item)=> {
+
+                if( item?._id == cartItem?._id && item.variant.name == cartItem?.variant?.name ) {
+    
+                    return {
+                        ...item,
+                        quantity: item?.quantity + 1,
+                    }
+                }
+    
+                return item
+            })
+        } else {
+
+            newItems = [ ...cart.items, cartItem ]
+        }
+        // let newItems = cart.items.map((item)=> {
+
+        //     if( item?._id == cartItem?._id && item.variant.name == cartItem?.variant?.name ) {
+
+        //         return {
+        //             ...item,
+        //             quantity: item?.quantity + 1,
+        //         }
+        //     }
+
+        //     return item
         // })
 
         console.log('====================================');
