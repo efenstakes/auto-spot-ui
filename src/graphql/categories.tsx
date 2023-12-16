@@ -50,8 +50,8 @@ export const GET_PRODUCT_CATEGORIES_QUERY = gql`
 
 // get profile query
 export const GetProductsQuery = gql`
-  query getProducts($name: String, $model: String, $brand: String, $year: Int) {
-    getProducts( name: $name, model: $model, brand: $brand, year: $year ) {
+  query getProducts($input: SearchProductsInput!, $limit: Float, $offset: Float) {
+    getProducts( input: $input, limit: $limit, offset: $offset ) {
         
         _id
         name
