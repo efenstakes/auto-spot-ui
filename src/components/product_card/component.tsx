@@ -101,9 +101,9 @@ const ProductCard = ({ product: { name, brand, model, variants, years, } }: Prop
             <motion.div variants={containerVariants} className='row ma_space_btn ca_center'>
 
                 {/* name */}
-                <motion.h2 variants={itemVariants}>
+                <motion.h4 variants={itemVariants}>
                     { name }
-                </motion.h2>
+                </motion.h4>
 
                 {/* year */}
                 <motion.p variants={itemVariants}>

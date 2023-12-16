@@ -33,6 +33,7 @@
     object-fit: cover;
     height: 100%;
     width: 100%;
+    border-radius: $BORDER_RADIUS_SM;
 
     transition: 400ms;
 }
