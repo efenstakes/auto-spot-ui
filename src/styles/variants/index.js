@@ -24,6 +24,15 @@ export const containerVariants = {
     }
 }
 
+export const itemFadeInVariants = {
+    initial: {
+        opacity: 0,
+    },
+    animate: {
+        opacity: 1,
+    },
+}
+
 export const itemVariants = {
     initial: {
         y: 120,
