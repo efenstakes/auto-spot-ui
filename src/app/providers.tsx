@@ -35,7 +35,7 @@ import { ToastContainer } from 'react-toastify';
 
 
 const httpLink = createHttpLink({
-  uri: `${SERVER_URL}/graph`,
+  uri: `${SERVER_URL}/api`,
   // include works for development because server and ui are in different domains
   // in prod, same-origin should be used instead
   credentials: 'same-origin', // 'include', // 'same-origin'
