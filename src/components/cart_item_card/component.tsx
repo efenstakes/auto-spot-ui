@@ -23,11 +23,11 @@ type CartItemCardProps = {
 const CartItemCard = ({ mode = "CART", product: { brand, model, name, year, variant, _id, quantity } }: CartItemCardProps) => {
     const [ cart, setCart ] = useAtom(cartAtom)
 
-    const { price, type, } = variant
+    const { price, } = variant
 
 
     const deleteItem = ()=> {
-        const newItems = cart.items.filter((product)=> product?._id != _id)
+        const newItems = cart.items.filter((product)=> product?._id != _id && product?.variant.name == variant.name)
 
         setCart((_)=> { 
             return { items: newItems }
@@ -37,7 +37,7 @@ const CartItemCard = ({ mode = "CART", product: { brand, model, name, year, vari
     const addQuantity = ()=> {
         const newItems = cart.items.map((product)=> {
 
-            if( product?._id == _id ) {
+            if( product?._id == _id && product?.variant.name == variant.name ) {
 
                 return {
                     ...product,
@@ -64,7 +64,7 @@ const CartItemCard = ({ mode = "CART", product: { brand, model, name, year, vari
     const reduceQuantity = ()=> {
         let newItems = cart.items.map((product)=> {
 
-            if( product?._id == _id ) {
+            if( product?._id == _id && product?.variant.name == variant.name ) {
 
                 return {
                     ...product,
