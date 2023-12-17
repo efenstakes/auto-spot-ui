@@ -1,12 +1,15 @@
 import { motion } from 'framer-motion'
 import React from 'react'
-
+import { Button, Chip } from '@mui/material'
 
 // models
 import { ISelectedFilters } from '@/models/filters'
+
+// styles
 import { containerVariants, itemFadeInVariants, itemVariants } from '@/styles/variants'
 import { CAR_BRANDS } from '@/utility/constants'
-import { Button, Chip } from '@mui/material'
+
+// components
 import VSpacer from '@/components/v_spacer/component'
 
 
@@ -32,7 +35,7 @@ const DrawerFilters = ({ onClickYear, onClickBrand, onClickModel, filters, model
             </motion.p>
 
             {/* brands */}
-            <motion.p variants={itemVariants} className='text_center title_7'>
+            <motion.p variants={itemVariants} className='title_7'>
                 Select Brand
             </motion.p>
             <VSpacer space={.5} />
@@ -56,6 +59,12 @@ const DrawerFilters = ({ onClickYear, onClickBrand, onClickModel, filters, model
             {
                 filters.brand && filters.brand != "All" &&
                     <>
+
+                        <motion.p variants={itemVariants} className='title_7'>
+                            Select Model
+                        </motion.p>
+                        <VSpacer space={.5} />
+
                         <motion.div variants={containerVariants} initial="initial" animate="animate" className='row_wrapped ca_center model_chips_container'>
                             {
                                 [ "All", ...models ].map((model)=> {
@@ -76,13 +85,19 @@ const DrawerFilters = ({ onClickYear, onClickBrand, onClickModel, filters, model
             {
                 filters.brand && filters.brand != "All" &&
                     <>
+
+                        <motion.p variants={itemVariants} className='title_7'>
+                            Select Year
+                        </motion.p>
+                        <VSpacer space={.5} />
+
                         <motion.div variants={containerVariants} initial="initial" animate="animate" className='row_wrapped ca_center model_chips_container'>
                             {
                                 Array.from({ length: 15 }, (_, i)=> (new Date()).getFullYear() - i).map((year)=> {
                 
                                     return (
-                                        <motion.div key={year} variants={itemFadeInVariants} onClick={()=> onClickYear(year.toString())}>
-                                            <Chip label={year} color='primary' variant={ filters?.year == year.toString() ? "filled" : "outlined" } />
+                                        <motion.div key={year} variants={itemFadeInVariants} onClick={()=> onClickYear(year)}>
+                                            <Chip label={year} color='primary' variant={ filters?.year == year ? "filled" : "outlined" } />
                                         </motion.div>
                                     )
                                 })
@@ -96,6 +111,7 @@ const DrawerFilters = ({ onClickYear, onClickBrand, onClickModel, filters, model
             <Button onClick={close} fullWidth variant='contained' style={{ textTransform: 'none', }}>
                 Filter
             </Button>
+            <VSpacer space={2} />
             
         </motion.div>
     )
