@@ -1,8 +1,5 @@
 import { BLACK_COLOR } from "../theme"
 
-
-
-
 export const containerVariants = {
     initial: {
         // scale: .8,
