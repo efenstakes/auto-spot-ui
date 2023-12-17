@@ -11,7 +11,7 @@ import IProduct from '@/models/product'
 
 // styles
 import "./component.scss"
-import { containerVariants, itemVariants } from '@/styles/variants'
+import { containerVariants, itemFadeInVariants, itemVariants } from '@/styles/variants'
 import VSpacer from '../v_spacer/component'
 
 type Props = {
@@ -92,7 +92,7 @@ const ProductCard = ({ product: { name, brand, model, variants, years, } }: Prop
             <motion.div variants={containerVariants} className='product_card__image_container'>
                 <motion.img
                     src={variants[0]?.image}
-                    variants={itemVariants}
+                    variants={itemFadeInVariants}
                     className="product_card__image"
                 />
             </motion.div>
