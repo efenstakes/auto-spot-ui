@@ -1,2 +1,7 @@
 @import "../../styles/commons";
 
+
+.drawer_container {
+    border-top-left-radius: $BORDER_RADIUS;
+    border-top-right-radius: $BORDER_RADIUS;
+}
