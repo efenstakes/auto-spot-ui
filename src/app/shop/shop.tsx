@@ -82,7 +82,7 @@ const Shop = () => {
         })
     }
 
-    const onClickYear = (year: string)=> {
+    const onClickYear = (year: number)=> {
 
         // check if a
         setFilters((state)=> {
