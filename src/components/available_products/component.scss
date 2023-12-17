@@ -1,0 +1,27 @@
+@import "../../styles/commons";
+
+
+.brand_card__image_container {
+    margin-top: 2rem;
+    height: 100px;
+    width: 100%;
+
+    border-radius: $BORDER_RADIUS_SM;
+
+    overflow: hidden;
+
+    &:hover .brand_card__image {
+
+        transform: scale(1.1);
+    }
+}
+
+.brand_card__image {
+    object-fit: contain;
+    height: 100px;
+    width: 100%;
+
+    border-radius: $BORDER_RADIUS_SM;
+
+    transition: 400ms;
+}
