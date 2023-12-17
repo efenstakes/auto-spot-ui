@@ -1,0 +1,14 @@
+@import "../../styles/commons";
+
+
+.about_card {
+    border-radius: $BORDER_RADIUS_SM;
+    border: .5px solid lightgray;
+
+    padding: 2rem 1rem;
+    height: 260px;
+}
+
+.about_card_text {
+    font-size: 1rem;
+}
